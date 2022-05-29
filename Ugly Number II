@@ -1,0 +1,93 @@
+
+Second Apptoach - TLE
+
+class Solution {
+    public int nthUglyNumber(int n) { 
+        if(n<=6) return n;
+Set<Integer> s= new HashSet<>();
+        s.add(1);
+        s.add(2);
+        s.add(3);
+        s.add(4);
+        s.add(5);
+        s.add(6);
+        
+        
+        int g=n-6;
+        int p=7;
+        while(g>0)
+        {
+           int y=p;
+            if(p%2==0)
+            {
+                y=y/2;
+            }
+            if(p%3==0)
+            {
+                 y=y/3;
+            }
+            if(p%5==0)
+            {
+                 y=y/5;
+            }
+            if(s.contains(y)){s.add(p); g--;}
+            
+            
+            p++;
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        return p-1;
+        
+    }
+}
+
+
+
+
+
+
+Optimized Solution - Accepted
+
+class Solution {
+    public int nthUglyNumber(int n) {
+        int[] dp= new int[n+1];
+        
+        dp[1]=1;
+        int a=1;
+        int b=1;
+        int c=1;
+        
+        for(int i=2;i<n+1;i++)
+        {
+            
+            int two=dp[a]*2;
+            int three= dp[b]*3;
+            int four= dp[c]*5;
+            dp[i]=Math.min(two, Math.min(three,four));
+            
+            if(dp[i]==two) a++;
+            if(dp[i]==three) b++;
+            if(dp[i]==four) c++;
+            
+            
+        }
+        
+      return dp[n];  
+    }
+}
+
+
+
+
+
+
+
+
