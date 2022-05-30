@@ -1,0 +1,80 @@
+Brute Force Code - Accepted
+
+class Solution {
+    public int[] findRightInterval(int[][] intervals) {
+        int[] ans= new int[intervals.length];
+        
+        
+        for(int i=0;i<intervals.length;i++) 
+        {
+            int ind=Integer.MAX_VALUE;
+            int index=-1;
+            for(int j=0;j<intervals.length;j++)
+            {
+                
+                if(intervals[i][1]<=intervals[j][0] && j!=i)
+                {
+                    
+                    if((intervals[j][0]-intervals[i][1])<ind)
+                    {
+                        ind=intervals[j][0]-intervals[i][1];
+                        index=j;
+                      
+                    }
+                    
+                    
+                }
+                
+                
+                
+            }
+            
+            ans[i]=index;
+            if(intervals[i][0]==intervals[i][1]) ans[i]=i;
+        }
+        
+        return ans;
+        
+        
+        
+    }
+}
+
+
+
+
+
+
+
+Optimized using TreeMap - Accepted
+
+
+class Solution {
+    public int[] findRightInterval(int[][] intervals) {
+        
+        TreeMap<Integer,Integer> tr= new TreeMap<>();
+        
+        for(int i=0;i<intervals.length;i++)
+        {
+            tr.put(intervals[i][0],i);
+        }
+        int[] ans= new int[intervals.length];
+        
+        for(int i=0;i<intervals.length;i++)
+        {
+            int ind= intervals[i][1];
+            
+            if(tr.ceilingKey(ind)==null) ans[i]=-1;
+            else ans[i]=tr.get(tr.ceilingKey(ind));
+            
+            
+            
+        }
+        
+        
+       return ans; 
+    }
+}
+
+
+
