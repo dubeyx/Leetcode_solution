@@ -1,0 +1,21 @@
+class Solution {
+    public long mostPoints(int[][] q) {
+        
+        long[] dp = new long[q.length];
+        dp[q.length-1]=q[q.length-1][0];
+        
+        for(int i=q.length-2;i>=0;i--)
+        {
+            long y=0;
+            int t = q[i][1]+i+1;
+            if(t<q.length) y=(long)dp[t];
+            
+            dp[i]=Math.max(dp[i+1],y+q[i][0]);
+               
+        }
+     return dp[0];   
+        
+        
+        
+    }
+}
