@@ -1,0 +1,50 @@
+class Solution {
+    public String longestWord(String[] words) {
+        Set<String> x= new HashSet<>();
+        for(int i=0;i<words.length;i++) x.add(words[i]);
+        int max=0;
+        String ans="";
+        for(int i=0;i<words.length;i++)
+        {
+        
+            String s= words[i];
+            boolean t=false;
+            for(int j=0;j<s.length();j++)
+            {
+                
+               if(x.contains(s.substring(0,j+1)))
+               {
+                   t= true;
+               }
+                else 
+                {
+                    t=false;
+                    break;
+                }
+                
+                
+            }
+            
+            if(t==true)
+            {
+               
+              if(words[i].length()>ans.length())
+              {
+                  ans=words[i];
+              }
+                else if(words[i].length()==ans.length())
+                {
+                    
+                    if(words[i].compareTo(ans)<0)
+                    {
+                        ans=words[i];
+                    }
+                    
+                    
+                }   
+            }        
+        }
+        
+      return ans;
+    }
+}
