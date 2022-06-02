@@ -1,0 +1,118 @@
+Brute Force Approach -TLE
+
+
+class Solution {
+    public int numMatchingSubseq(String s, String[] words) {
+        
+        int ans=0;
+        for(int i=0;i<words.length;i++)
+        {
+            
+            if(isSubsequence(words[i],s)==true)
+            {
+                ans++;
+            }
+            
+        }
+        
+        
+        return ans;
+        
+        
+    }
+     public boolean isSubsequence(String s, String t) {
+        if(s.length()==0) return true;
+        if(s.length()>t.length()) return false;
+        int j=0;
+        for(int i=0;i<t.length();i++)
+        {
+          
+            if(s.charAt(j)==t.charAt(i)) j++;
+            if(j==s.length()) return true;
+              
+        }
+       return j==s.length(); 
+    }
+}
+
+
+
+
+
+
+
+oPTIMIZED - ACCEPTED 
+
+
+
+class Solution {
+    public int numMatchingSubseq(String s, String[] words) {
+        
+        Map<Character, List<Integer>> mp= new HashMap<>();
+        
+         for(int i=0; i<s.length(); i++){
+            mp.computeIfAbsent(s.charAt(i),l->new ArrayList<>()).add(i);
+        }
+        
+        
+         System.out.println(mp);
+        
+        int ans=0;
+        for(int i=0;i<words.length;i++)
+        {
+            
+        if(check(mp,words[i])) ans++;
+            
+            
+        }
+        
+        
+        return ans;
+        
+        
+    }
+    public boolean check(Map<Character, List<Integer>> mp, String s)
+    {
+        
+        int p=-1;
+        for(int i=0;i<s.length();i++)
+        {
+            
+            if(!mp.containsKey(s.charAt(i))) return false;
+            
+            else
+            {
+               
+                List<Integer> st= mp.get(s.charAt(i));
+              //   System.out.println(st);
+                int l=p;
+                
+                for(int h: st)
+                {
+                    if(h>p)
+                    {
+                        p=h;
+                        break ;
+                    }
+                }
+                if(l==p) return false;
+                
+                
+                
+                
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+      return true;  
+    }
+   
+}
+
+
+
