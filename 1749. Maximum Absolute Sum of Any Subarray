@@ -1,0 +1,14 @@
+class Solution {
+    public int maxAbsoluteSum(int[] nums) {
+      int sum = 0, currsum1 = 0, currsum2 = 0;
+        for(int val: nums){
+            currsum1 += val; currsum2 += val * (-1);
+            sum = Math.max(sum, Math.max(currsum1, currsum2));
+            
+            if(currsum1 < 0)     currsum1 = 0;
+            if(currsum2 < 0)    currsum2 = 0;
+        }
+        return sum;
+        
+    }
+}
