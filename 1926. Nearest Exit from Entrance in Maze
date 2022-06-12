@@ -1,0 +1,77 @@
+class Solution {
+    
+    public class pair{
+        
+        int x;
+        int y;
+        int val;
+        public pair(int x, int y, int val)
+        {
+            this.x=x;
+            this.y=y;
+            this.val=val;
+            
+        }   
+    }
+    public int nearestExit(char[][] maze, int[] entrance) {
+        
+        
+        int[][] dir ={{0,1},{1,0},{0,-1},{-1,0}};
+        Queue<pair> que = new LinkedList<>();
+        pair p = new pair(entrance[0],entrance[1],0);
+        que.add(p);
+        maze[entrance[0]][entrance[1]]='+';
+        
+        while(que.size()>0)
+        {
+            
+            pair pr = que.remove();
+            
+            for(int i=0;i<4;i++)
+            {
+int nr = pr.x + dir[i][0];
+    int nc = pr.y + dir[i][1];
+                int n= maze.length;
+                int m= maze[0].length;
+if(nr >= 0 && nc >= 0 && nr < maze.length && nc < maze[0].length && maze[nr][nc] == '.') {
+                	if(nr == 0 || nr == n - 1 || nc == 0 || nc == m - 1)
+                		return pr.val + 1;
+                	else{
+                		que.add(new pair(nr, nc, pr.val + 1));
+                        maze[nr][nc] = '+';
+                    }
+                }   
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+       return -1; 
+        
+        
+        
+    }
+}
