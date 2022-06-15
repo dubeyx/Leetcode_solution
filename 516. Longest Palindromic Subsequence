@@ -1,0 +1,56 @@
+Brute Force - TLE
+
+class Solution {
+    int ans=0;
+    public int longestPalindromeSubseq(String s) {
+        help(s , 0,"");
+    return ans;
+    }
+    public void help(String s, int i, String tar)
+    {
+        
+       if(i>=s.length()){ 
+           
+           if(is(tar))
+           {
+               ans=Math.max(ans, tar.length());
+           }
+           return;
+          }
+        
+     help(s,i+1,tar+s.charAt(i));
+         help(s,i+1,tar);
+       
+        
+    }
+    public boolean is( String s)
+    {
+       
+        for(int i=0;i<s.length()/2;i++)
+        {
+            if(s.charAt(i)!=s.charAt(s.length()-1-i)) return false;
+            
+            
+        }
+       return true; 
+    }
+    
+}
+
+
+
+Optimized - Accepted
+
+
+
+
+
+
+
+
+
+
+
+
+
+
