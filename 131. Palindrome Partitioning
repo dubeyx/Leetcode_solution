@@ -1,0 +1,78 @@
+class Solution {
+    public List<List<String>> partition(String s) {
+        
+        List<List<String>> ans= new ArrayList<>();
+        
+        List<String> d = new ArrayList<>();
+        help(s,d,ans, 0);
+        
+        
+        
+        return ans;
+    }
+    
+    public void help(String s, List<String> d ,List<List<String>> ans, int ind)
+    {
+        
+        if(ind>=s.length())
+        {
+            ans.add(new ArrayList(d));
+            return;
+        }
+        
+        for(int i=ind;i<s.length();i++)
+        {
+            if(is(s,ind,i))
+            {
+                
+                d.add(s.substring(ind,i+1));
+                help(s,d,ans,i+1);
+                d.remove(d.size()-1);
+                
+                
+                
+            }
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    public boolean is(String s , int i, int j)
+    {
+        
+   while(i<j)
+   {
+       
+       if(s.charAt(i)!=s.charAt(j)) return false;
+       i++;
+       j--;
+       
+   }
+        
+        
+        
+        
+      return true;  
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+}
