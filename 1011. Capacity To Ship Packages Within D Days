@@ -1,0 +1,60 @@
+class Solution {
+    public int shipWithinDays(int[] weights, int days) {
+      //  Arrays.sort(weights);
+        
+        int l=0;
+        int ans=0;
+        int r=0;
+        for(int i=0;i<weights.length;i++)
+        {
+            l=Math.max(l,weights[i]);
+            r=r+weights[i];
+        }
+        
+        
+        while(l<=r)
+        {
+            int mid= l + (r-l)/2;
+            
+            
+            int c = check(weights,mid);
+            
+            
+            if(c<=days) {r=mid-1; ans=mid;}
+            else l=mid+1;     
+        }
+      return ans;  
+    }
+    public int check(int[] w , int mid)
+    {
+        
+        int c=0;
+        int sum=0;
+        
+        
+        for(int i=0;i<w.length;i++)
+        {
+            
+         if(sum+w[i]<=mid) sum=sum+w[i];
+            else {c++; sum=w[i];}
+            
+            
+            
+            
+            
+        }
+        
+        
+        
+        
+      return c+1;  
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+}
