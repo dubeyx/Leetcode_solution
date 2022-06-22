@@ -1,0 +1,33 @@
+class Solution {
+    public int maximumBags(int[] capacity, int[] rocks, int a) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        
+        for(int i=0;i<capacity.length;i++)
+        {
+            
+            
+            pq.add(capacity[i]-rocks[i]);
+            
+            
+            
+        }
+        int ans=0;
+       
+        while(!pq.isEmpty() && a>0)
+        {
+            
+          int t = pq.poll();
+            if(t==0) ans++;
+           else if(t<=a){ans++; a=a-t;}
+            
+            
+        }
+        
+        
+        
+        
+      return ans;  
+        
+        
+    }
+}
