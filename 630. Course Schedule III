@@ -1,0 +1,52 @@
+class Solution {
+    public int scheduleCourse(int[][] courses) {
+PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        Arrays.sort(courses, (a,b)->(a[1]-b[1]));
+        pq.add(0);
+        int ans=0, sum=0;
+        for(int i=0;i<courses.length;i++)
+        {
+            if(courses[i][1]<courses[i][0]) continue;
+            
+            
+            if(courses[i][1]>=sum+courses[i][0])
+            {
+                ans++;
+                sum=sum+courses[i][0];
+                pq.add(courses[i][0]);
+            }
+            else
+            {
+               if(pq.peek()>courses[i][0])
+               {
+                   int t= pq.poll();
+                  if(sum-t+courses[i][0]<=courses[i][1])
+                  {
+                   sum=sum-t+courses[i][0];
+                      pq.add(courses[i][0]);
+                      
+                  }
+                   else
+                   {
+                       pq.add(t);
+                   }
+                  
+               }
+                else
+                {
+                    continue;
+                }
+                
+                
+            }
+            
+            
+            
+        }
+        
+        
+        
+       return ans; 
+        
+    }
+}
