@@ -1,0 +1,71 @@
+Brute Force - TLE
+
+class Solution {
+    int ans=Integer.MAX_VALUE;
+    public int findCheapestPrice(int n, int[][] pre, int src, int dst, int k) {
+        Map<Integer,List<int[]>> mp= new HashMap<>();
+        for(int i=0;i<pre.length;i++){
+            
+            if(mp.containsKey(pre[i][0]))
+            {
+                mp.get(pre[i][0]).add(new int[]{pre[i][1],pre[i][2]});
+            }else{
+                
+                List<int[]> l = new ArrayList<>();
+                l.add(new int[]{pre[i][1],pre[i][2]});
+                
+                mp.put(pre[i][0],l);
+                
+                
+            }
+            
+        }
+        int[] vis = new int[n];
+     
+        dfs(mp,vis, src, dst,k+1,0);
+        
+        return ans==Integer.MAX_VALUE?-1:ans;
+        
+        
+    }
+    
+    
+public void dfs(Map<Integer,List<int[]>> mp, int[] vis, int src, int dst, int k,int sum)
+    {
+ if(k>=0 && src==dst)
+ {
+  ans=Math.min(sum,ans); 
+     return;
+ }
+    if(k==0) return;
+     if(!mp.containsKey(src)) return ;
+    vis[src]=1;
+    List<int[]> list = mp.get(src);
+    
+    for(int i=0;i<list.size();i++)
+    {
+        
+        if(vis[list.get(i)[0]]!=1)
+        {
+            dfs(mp,vis,list.get(i)[0],dst,k-1,sum+list.get(i)[1]);
+        }
+        
+        
+        
+        
+    }
+        
+          
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
