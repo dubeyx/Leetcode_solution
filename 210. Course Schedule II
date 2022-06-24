@@ -1,0 +1,98 @@
+class Solution {
+    public int[] findOrder(int num, int[][] pre) {
+        
+        Map<Integer,List<Integer>> mp= new HashMap<>();
+        
+        for(int i=0;i<pre.length;i++){
+            
+            if(mp.containsKey(pre[i][0]))
+            {
+                mp.get(pre[i][0]).add(pre[i][1]);
+            }else{
+                
+                List<Integer> l = new ArrayList<>();
+                l.add(pre[i][1]);
+                
+                mp.put(pre[i][0],l);
+                
+                
+            }
+            
+        }
+        
+        int[] vis = new int[num];
+        Stack<Integer> st = new Stack<>();
+        
+        for(int i=0;i<num;i++){
+            
+            if(vis[i]==0)
+            {
+                if(dfs(mp,vis,i,st)==true)
+                    return new int[0];
+            }
+            
+            
+            
+        }
+        
+    int[] ans= new int[st.size()];
+        
+        int i=0;
+        
+        while(!st.isEmpty())
+        {
+            
+            ans[ans.length-1-i]=st.pop();
+            i++;
+            
+            
+        }
+        return ans;
+        
+        
+    }
+    
+    
+     public boolean dfs(Map<Integer, List<Integer>> mp, int[] vis, int v,Stack<Integer> st)
+    {
+        
+        if(vis[v]==2) return true;
+        
+        if(!mp.containsKey(v)){
+            
+             if(!st.contains(v)) st.add(v);
+            return false;
+            
+            
+        }
+        
+        List<Integer> ab = mp.get(v);
+        vis[v]=2;
+        
+        for(int i=0;i<ab.size();i++)
+        {
+            if(vis[ab.get(i)]!=1)
+            {
+                if(dfs(mp,vis,ab.get(i),st)) return true;
+            }
+            
+        }
+        
+   if(!st.contains(v)) st.add(v);
+      vis[v]=1;  
+        return false;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
