@@ -1,0 +1,40 @@
+class Solution {
+    public int minSwaps(int[] nums) {
+        int[] num= new int[2*nums.length];
+        int c=0;
+        for(int i=0;i<num.length;i++){
+            
+            num[i]=nums[i%nums.length];
+            
+            if(i<nums.length && nums[i]==1) c++;
+            
+            
+        }
+        
+        
+        int num_one=0;
+        int ans=Integer.MIN_VALUE;
+        
+        for(int i=0;i<num.length;i++){
+            
+            if(i>=c && num[i-c]==1) num_one--;
+            
+            if(num[i]==1) num_one++;
+            
+            ans=Math.max(ans,num_one);
+            
+            
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+    return c-ans;    
+    }
+}
