@@ -1,0 +1,32 @@
+class Solution {
+    public int maximumScore(int a, int b, int c) {
+        
+        PriorityQueue<Integer> pq= new PriorityQueue<>(Collections.reverseOrder());
+        pq.add(a);
+        pq.add(b);
+        pq.add(c);
+        int ans=0;
+        while(true){
+        int t= pq.poll();
+            int q=pq.poll();
+            if(t==0 || q==0) return ans;
+            
+            ans++;
+            int u = Math.min(t,q);
+            
+            int o = u-pq.peek();
+            ans=ans+u;
+            
+            pq.add(t-1-u);
+            pq.add(q-1-u);
+            
+         
+            
+        }
+        
+        
+        
+        
+      //  return ans;
+    }
+}
