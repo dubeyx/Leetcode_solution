@@ -1,0 +1,22 @@
+class Solution {
+    public int waysToSplitArray(int[] nums) {
+     
+        final int n = nums.length;
+        
+        long sum = 0;
+        for (int i=0; i<n; i++) {
+            sum += nums[i];
+        }
+        
+        int count = 0;
+        long left = 0;
+        for (int i=0; i<n-1; i++) {
+            left += nums[i];
+            final long right = (sum - left);
+            if (left >= right) count++;
+        }
+        
+        return count;
+    }
+    
+}
