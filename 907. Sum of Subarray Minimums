@@ -1,0 +1,74 @@
+class pair{
+    int val;
+    int count;
+    pair(int val, int count)
+    {
+        this.val=val;
+        this.count=count;
+    }
+    
+    
+}
+
+
+class Solution {
+    long mod = (int)Math.pow(10,9)+7;
+    public int sumSubarrayMins(int[] arr) {
+        
+        Stack<pair> st1= new Stack<>();
+        Stack<pair> st2= new Stack<>();
+        
+        int[] left= new int[arr.length];
+         int[] right= new int[arr.length];
+        
+        
+        for(int i=0;i<arr.length;i++)
+        {
+            
+            pair p= new pair(arr[i],1);
+            
+            while(!st1.isEmpty() && st1.peek().val>p.val)
+            {
+             pair g=   st1.pop();
+                p.count+=g.count;
+            }
+            
+            
+          st1.add(p);
+            left[i]=p.count; 
+        }
+        
+        for(int i=arr.length-1;i>=0;i--)
+        {
+            
+            pair p= new pair(arr[i],1);
+            
+            while(!st2.isEmpty() && st2.peek().val>=p.val)
+            {
+             pair g=   st2.pop();
+                p.count=p.count+g.count;
+            }
+            
+            
+          st2.add(p);
+            right[i]=p.count; 
+        }
+        
+        long ans=0;
+        
+        
+        for(int i=0;i<left.length;i++)
+        {
+            ans=(ans + (long)left[i] * right[i] *arr[i])%mod;
+        }
+        
+        
+        
+        
+        
+       return (int)ans; 
+        
+        
+        
+    }
+}
