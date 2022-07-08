@@ -1,0 +1,32 @@
+class Solution {
+    Map<Integer, Boolean> mp= new HashMap<>();
+    public boolean canPartition(int[] nums) {
+        Arrays.sort(nums);
+        int sum=0;
+      for(int i=0;i<nums.length;i++)
+      {
+          sum=sum+nums[i];
+      }
+        if(sum%2!=0) return false;
+        
+        
+  return      help(nums, sum/2, 0);
+        
+        
+
+        
+        
+    }
+    public boolean help(int[] nums,int target, int i)
+    {
+        if(mp.containsKey(target)) return mp.get(target);
+        if(i>=nums.length && target!=0) return false;
+        if(target<0) return false;
+        if(target==0) return true;
+        boolean a=help(nums,target-nums[i],i+1);
+            boolean b= help(nums,target,i+1);
+        mp.put(target ,a||b);
+        
+        return   a||b;
+    }
+}
