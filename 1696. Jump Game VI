@@ -1,0 +1,36 @@
+class Solution {
+    public int maxResult(int[] nums, int k) {
+        
+PriorityQueue<Node> p = new PriorityQueue<>((Node a , Node b)-> b.Val-a.Val);
+        int[] dp= new int[nums.length];
+        dp[0]=nums[0];
+        p.add(new Node(0,nums[0]));
+        for(int i=1;i<nums.length;i++)
+        {
+           
+            while(!p.isEmpty() && p.peek().indx<i-k)
+            {
+                p.remove();
+            }
+            
+            dp[i]=nums[i]+p.peek().Val;
+            p.add(new Node(i,dp[i]));
+             
+            
+        }
+            return dp[nums.length-1];
+        
+    }
+
+}
+class Node{
+    
+   int indx;
+    int Val;
+    public Node(int indx, int Val)
+    {
+        this.indx=indx;
+        this.Val=Val;
+    }    
+    
+}
