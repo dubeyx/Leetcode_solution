@@ -1,0 +1,66 @@
+class pair{
+    
+    int idx;
+    int sum;
+    pair(int idx, int sum){
+        this.idx=idx;
+        this.sum=sum;
+    }
+    
+    
+}
+
+
+class Solution {
+    
+    
+    public int[][] restoreMatrix(int[] rowSum, int[] colSum) {
+        PriorityQueue<pair> p1= new PriorityQueue<>((p,q)->p.sum-q.sum);
+        PriorityQueue<pair> p2= new PriorityQueue<>((p,q)->p.sum-q.sum);  
+        int[][] ans= new int[rowSum.length][colSum.length];
+        
+        for(int i=0;i<rowSum.length;i++)
+        {
+            p1.add(new pair(i,rowSum[i]));
+        }
+        
+         for(int i=0;i<colSum.length;i++)
+        {
+            p2.add(new pair(i,colSum[i]));
+        }
+        
+        while(!p1.isEmpty()){
+            
+if(p1.peek().sum>p2.peek().sum){
+    pair g = p1.poll();
+    ans[g.idx][p2.peek().idx]=p2.peek().sum;
+    g.sum-=p2.peek().sum;
+    p2.poll();
+    p1.add(g);
+}else{
+    
+    pair g = p2.poll();
+    ans[p1.peek().idx][g.idx]=p1.peek().sum;
+    g.sum-=p1.peek().sum;
+    p1.poll(); 
+    
+    if(g.sum!=0) p2.add(g);
+    
+    
+    
+}
+            
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+      return ans;  
+        
+    }
+}
