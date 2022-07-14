@@ -1,0 +1,22 @@
+class Solution {
+    int p=0;
+    public TreeNode constructFromPrePost(int[] preorder, int[] postorder) {
+        p=preorder.length-1;
+        return generateTree(preorder,postorder,0,preorder.length-1);
+    }
+    public TreeNode generateTree(int[] preorder,int [] postorder,int s,int e){
+        if(s>e) return null;
+        TreeNode node = new TreeNode(postorder[p],null,null);
+        int k=e+1;
+        p--;
+        for(int i=s+1;i<=e;i++){
+            if(preorder[i] == postorder[p]){
+                k=i;break;
+            }
+        }
+        TreeNode right = generateTree(preorder,postorder,k,e);
+        TreeNode left = generateTree(preorder,postorder,s+1,k-1);
+        node.left = left;
+        node.right = right;
+        return node;
+    }}
