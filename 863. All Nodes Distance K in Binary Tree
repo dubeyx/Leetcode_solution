@@ -1,0 +1,75 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    TreeNode tar;
+    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+        tar=target;
+        Set<Integer> st= new HashSet<>();
+        Map<TreeNode,TreeNode> parent= new HashMap<>();
+        parent.put(root,new TreeNode(-1));
+        st.add(parent.get(root).val);
+        List<Integer> ans= new ArrayList<>();
+        makeParent(root,parent);
+        Queue<TreeNode> q= new LinkedList<>();
+        q.add(tar);
+        q.add(null);
+        int i=0;
+        while(!q.isEmpty() && i<=k){
+           
+            while(q.peek()!=null){
+                TreeNode r = q.remove();
+                if(r.left!=null && !st.contains(r.left.val)) q.add(r.left);
+                 if(r.right!=null && !st.contains(r.right.val)) q.add(r.right);
+                if(!st.contains(parent.get(r).val)) q.add(parent.get(r));
+             if(i==k)   ans.add(r.val);
+                st.add(r.val);
+                
+            }
+            q.remove();
+            q.add(null);
+            if(q.size()==1) return ans;
+            i++;
+            
+            
+            
+            
+        }
+        
+        
+        
+        
+        
+  return ans;      
+        
+        
+    }
+    
+    public void makeParent(TreeNode root,Map<TreeNode,TreeNode>mp){
+        
+        
+     if(root==null) return;
+        if(root.val==tar.val) tar=root;
+        if(root.left!=null) mp.put(root.left,root);
+        if(root.right!=null) mp.put(root.right,root);
+        
+        makeParent(root.left,mp);
+        makeParent(root.right,mp);
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
