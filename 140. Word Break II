@@ -1,0 +1,39 @@
+class Solution {
+
+ Set<String> st= new HashSet<>();
+    int[] memset;
+    List<String> ans= new ArrayList<>();
+    public List<String> wordBreak(String s, List<String> wordDict) {
+    memset=new int[s.length()];
+        for(int i=0;i<wordDict.size();i++){
+            st.add(wordDict.get(i));
+        }
+        help(s,0,"");
+        return ans;
+    }
+    
+    public void help(String s, int i, String cur_word){
+        
+        if(i==s.length()) {ans.add(cur_word); return ;}
+        String temp="";
+        for(int j=i;j<s.length();j++)
+        {
+            
+          temp=temp+s.charAt(j);
+            
+            if(st.contains(temp)){
+               if(cur_word.length()==0) help(s,j+1 ,temp);
+                else help(s,j+1 ,cur_word +" "+ temp);
+            }
+            
+            
+        }
+
+    }
+    
+    
+    
+    
+    
+    
+}
