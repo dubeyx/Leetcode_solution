@@ -1,0 +1,27 @@
+class Solution {
+    public int arrayNesting(int[] nums) {
+        int ans=0;
+    int arr[] = new int[nums.length];
+         Set<Integer> x= new HashSet<>();
+        for(int i=0;i<nums.length;i++){
+            int j=i;
+            int p=0;
+            while(!x.contains(j)){
+                x.add(j);
+                j=nums[j];;
+                p++;
+                
+                
+            }
+            
+            ans=Math.max(ans,p);
+            
+        }
+        
+        
+        
+        
+      return ans;  
+        
+    }
+}
