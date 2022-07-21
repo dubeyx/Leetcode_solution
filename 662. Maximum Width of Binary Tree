@@ -1,0 +1,45 @@
+class Pair{
+    TreeNode a;
+    int level;
+    
+    Pair(TreeNode a ,int level){
+        this.a=a;
+        this.level=level;
+    }
+}
+class Solution {
+    public int widthOfBinaryTree(TreeNode root) {
+        
+        if(root==null){
+            return 0;
+        }
+        
+        ArrayDeque<Pair> q =new ArrayDeque<>();;
+        int width=1;
+        q.add(new Pair(root,0));
+        
+        while(q.size()!=0){
+            int size=q.size();
+            
+            while(size-->0){
+                Pair rem =q.remove();
+                
+                if(rem.a.left!=null){
+                    q.add(new Pair(rem.a.left,2*rem.level+1));
+                }
+                
+                if(rem.a.right!=null){
+                    q.add(new Pair(rem.a.right,2*rem.level+2));
+                }
+            }
+            
+            if(q.size()!=0){
+              width=Math.max(q.getLast().level-q.getFirst().level+1,width);  
+            }
+            
+            
+        }
+        
+        return width;
+    }
+}
