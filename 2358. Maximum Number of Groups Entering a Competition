@@ -1,0 +1,34 @@
+class Solution {
+    public int maximumGroups(int[] grades) {
+        Arrays.sort(grades);
+        int c=1;
+        int prev=1;
+        int cur=0;
+        int pc=0;
+        int ans=1;
+        for(int i=1;i<grades.length;i++)
+        {
+            
+                cur+=grades[i];
+                pc++;
+            
+           if(cur>prev && pc>c ) {
+              ans++;
+                prev=cur;
+                c=pc;
+                  cur=0;
+                pc=0;
+                
+            }
+            
+        }
+        
+ return ans;
+        
+        
+        
+        
+        
+        
+    }
+}
