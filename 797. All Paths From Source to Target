@@ -1,0 +1,61 @@
+class Solution {
+    
+     List<List<Integer>> ans= new ArrayList<>();
+    Map<Integer,List<Integer>> mp=null;
+    int[] vis;
+    public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+        
+         mp= new HashMap<>();
+        
+        for(int i=0;i<graph.length;i++)
+        {
+            
+            for(int j=0;j<graph[i].length;j++){
+                
+               if(mp.containsKey(i)) mp.get(i).add(graph[i][j]);
+                else {
+                    List<Integer> g= new ArrayList<>();
+                    g.add(graph[i][j]); 
+                    mp.put(i,g);
+                }
+            }
+            
+        }
+        
+        vis= new int[graph.length];
+       dfs(0,graph.length-1, new ArrayList<>()); 
+        return ans;
+        
+    }
+    
+    void dfs(int v, int end, List<Integer> l){
+     
+        if(v==end){
+            
+            List<Integer> o= new ArrayList<>(l);
+            o.add(end);
+            ans.add(o);
+          
+        }
+        
+        if(!mp.containsKey(v)) return;
+        l.add(v);
+        
+        List<Integer> p= mp.get(v);
+        
+        for(int i=0;i<p.size();i++){
+            dfs(p.get(i),end,new ArrayList<>(l));
+            
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+    }    
+    
+}
