@@ -1,0 +1,164 @@
+Brute Force - TLE
+
+
+class money{
+    int time;
+    int price;
+    public money(int time, int price){
+        this.time=time;
+        this.price=price;
+    }
+}
+
+class StockPrice {
+    int curPrice=-1;
+
+   Map<Integer,money> mp=null;
+    PriorityQueue<money> min ;
+    PriorityQueue<money> max ;
+    public StockPrice() {
+        mp=new HashMap<>();
+        min=new PriorityQueue<>( (a,b)->(a.price-b.price)    );
+        max=new PriorityQueue<>((a,b)->(b.price-a.price)   );
+        
+    }
+    
+    public void update(int timestamp, int price) {
+        
+        curPrice=Math.max(timestamp,curPrice);
+        if(!mp.containsKey(timestamp))
+        {
+            money m = new money(timestamp,price);
+            mp.put(timestamp,m);
+            min.add(m);
+            max.add(m);
+            
+            
+            
+        }
+        else{
+            
+            money u = mp.get(timestamp);
+            min.remove(u);
+            max.remove(u);
+            u.price=price;
+            min.add(u);
+            max.add(u);
+        }
+        
+    }
+    
+    public int current() {
+        return mp.get(curPrice).price;
+        
+    }
+    
+    public int maximum() {
+           return max.peek().price;
+    }
+    
+    public int minimum() {
+        
+        
+      
+           return min.peek().price;
+        
+    }
+}
+
+/**
+ * Your StockPrice object will be instantiated and called as such:
+ * StockPrice obj = new StockPrice();
+ * obj.update(timestamp,price);
+ * int param_2 = obj.current();
+ * int param_3 = obj.maximum();
+ * int param_4 = obj.minimum();
+ */
+ 
+ 
+ 
+ 
+ /***************************************/
+ 
+ 
+class money{
+    int time;
+    int price;
+    public money(int time, int price){
+        this.time=time;
+        this.price=price;
+    }
+}
+
+class StockPrice {
+    int curPrice=-1;
+
+   Map<Integer,money> mp=null;
+    PriorityQueue<money> min ;
+    PriorityQueue<money> max ;
+    public StockPrice() {
+        mp=new HashMap<>();
+        min=new PriorityQueue<>( (a,b)->(a.price-b.price)    );
+        max=new PriorityQueue<>((a,b)->(b.price-a.price)   );
+        
+    }
+    
+    public void update(int timestamp, int price) {
+        
+        curPrice=Math.max(timestamp,curPrice);
+        if(!mp.containsKey(timestamp))
+        {
+            money m = new money(timestamp,price);
+            mp.put(timestamp,m);
+            min.add(m);
+            max.add(m);
+            
+            
+            
+        }
+        else{
+            
+            money u = mp.get(timestamp);
+            min.remove(u);
+            max.remove(u);
+            u.price=price;
+            min.add(u);
+            max.add(u);
+        }
+        
+    }
+    
+    public int current() {
+        return mp.get(curPrice).price;
+        
+    }
+    
+    public int maximum() {
+           return max.peek().price;
+    }
+    
+    public int minimum() {
+        
+        
+      
+           return min.peek().price;
+        
+    }
+}
+
+/**
+ * Your StockPrice object will be instantiated and called as such:
+ * StockPrice obj = new StockPrice();
+ * obj.update(timestamp,price);
+ * int param_2 = obj.current();
+ * int param_3 = obj.maximum();
+ * int param_4 = obj.minimum();
+ */
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
