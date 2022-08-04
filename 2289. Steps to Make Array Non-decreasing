@@ -1,0 +1,25 @@
+class pair{
+    int first;
+    int second;
+    public pair(int first, int second){
+        this.first=first;
+        this.second=second;
+    }
+}
+class Solution {
+    public int totalSteps(int[] nums) {
+        int ans=0;
+        Stack<pair> st= new Stack<>();
+        for(int j=nums.length-1;j>=0;j--){
+            int y=0;
+            while(!st.isEmpty() && st.peek().first<nums[j]){
+                 y=Math.max(y+1,st.peek().second);
+                st.pop();
+            }
+            st.add(new pair(nums[j],y));
+            ans=Math.max(ans,y);   
+        }
+        return ans;
+        
+    }
+}
