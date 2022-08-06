@@ -1,0 +1,5 @@
+class Solution {
+    public int poorPigs(int buckets, int md, int mt) {
+        return (int)Math.ceil(((Math.log(buckets)/Math.log(mt/md+1))));    
+    }
+}
