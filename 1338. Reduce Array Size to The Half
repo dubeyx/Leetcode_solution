@@ -1,0 +1,41 @@
+class pair{
+    int val;
+    int count;
+    public pair(int val,int count){
+        this.val=val;
+        this.count=count;
+    }
+    
+}
+
+class Solution {
+    public int minSetSize(int[] arr) {
+     Map<Integer,Integer> mp= new HashMap<>();
+        for(int i=0;i<arr.length;i++){
+            mp.put(arr[i],mp.getOrDefault(arr[i],0)+1);
+        }
+        
+        PriorityQueue<pair> pq= new PriorityQueue<>( (p,q)->q.count-p.count);
+        
+        for(Map.Entry<Integer,Integer> mk : mp.entrySet()){
+            pq.add(new pair(mk.getKey(),mk.getValue()));
+        }
+        
+        
+        int y=arr.length/2;
+        int u=0;
+        int ans=0;
+        while(u<y){
+            
+            u+=pq.poll().count;
+            ans++;
+            
+        }
+        
+        
+        
+        
+     return  ans;  
+        
+    }
+}
