@@ -1,0 +1,20 @@
+class Solution {
+    public boolean isPossible(int[] nums) {
+        HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
+        HashMap<Integer,Integer> hmap = new HashMap<Integer,Integer>();
+        for(int num : nums) map.put(num,map.getOrDefault(num,0)+1);
+        for(int i=0;i<nums.length;i++){
+            if(hmap.getOrDefault(nums[i],0)>0 && map.get(nums[i])>0){
+                hmap.put(nums[i]+1,hmap.getOrDefault(nums[i]+1,0)+1);
+                hmap.put(nums[i],hmap.get(nums[i])-1);
+            }else if(map.get(nums[i])>0){
+                if(map.getOrDefault(nums[i]+1,0)==0 || map.getOrDefault(nums[i]+2,0)==0)  return false;
+                hmap.put(nums[i]+3,hmap.getOrDefault(nums[i]+3,0)+1);
+                map.put(nums[i]+1,map.get(nums[i]+1)-1);
+                map.put(nums[i]+2,map.get(nums[i]+2)-1);
+            }
+            map.put(nums[i],map.get(nums[i])-1);
+        }
+        return true;
+    }
+}
