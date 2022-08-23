@@ -1,0 +1,29 @@
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+       Stack<Integer> st = new Stack();
+        ListNode h=head;
+           ListNode g=head;
+        while(h!=null)
+        {
+            
+            st.add(h.val);
+            h=h.next;
+            
+            
+        }
+         while(g!=null)
+        {
+            
+            if(st.peek()!=g.val){ return false;}
+             st.pop();
+            g=g.next;
+            
+            
+        }
+        
+        
+        
+        return true;
+        
+    }
+}
