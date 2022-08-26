@@ -1,0 +1,18 @@
+class Solution {
+    public int countNumbersWithUniqueDigits(int n) {
+       if(n==0) return 1;
+        int[] dp= new int[n+2];
+        dp[1]=10;
+        for(int i=2;i<=n;i++){
+            int t = 9;
+            int m=9;
+            int g=1;
+            while(g++<i){
+                t=t*(m--);
+            }
+            
+            dp[i]=t+dp[i-1];   
+        }
+       return dp[n]; 
+    }
+}
