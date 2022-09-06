@@ -1,0 +1,25 @@
+class Solution {
+    public int twoEggDrop(int n) {
+       int ans=1;
+        int i=2;
+        
+        int k=2;
+        int prev=2;
+        while(i<=n){
+            
+            if(k==0){
+                k=prev+1;
+                prev=prev+1;
+               
+            }
+               ans=prev;
+            k--;
+            i++;
+            
+    }
+        
+        
+        return ans;
+        
+    }
+}
