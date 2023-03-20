@@ -1,0 +1,89 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    
+//     public void print(Queue<TreeNode> q){
+//         System.out.println(" ---");
+//         while(!q.isEmpty()){
+//             System.out.print(q.remove().val);
+//         }
+        
+//     }
+    public void reverse(List<TreeNode> li ){
+        
+        int i=0;
+        int j=li.size()-1;
+        
+        while(j>i){
+            
+           int temp=li.get(i).val;
+            li.get(i).val=li.get(j).val;
+            li.get(j).val=temp;
+            j--;
+            i++;
+            
+        }
+        
+        
+    }
+    
+    
+    
+    public TreeNode reverseOddLevels(TreeNode root) {
+        
+        Queue<TreeNode> q= new LinkedList<>();
+        
+        q.add(root);
+        q.add(new TreeNode(-1));
+        int p=0;
+        
+        while(!q.isEmpty()){
+            
+            List<TreeNode> x= new ArrayList<>();
+            while(q.peek().val!=-1){
+                
+                TreeNode tr= q.remove();
+                x.add(tr);
+                
+                if(tr.left!=null) q.add(tr.left);
+                if(tr.right!=null) q.add(tr.right);
+                
+                
+                
+                
+            }
+            
+            if(p%2!=0){
+                reverse(x);
+            }
+          if(x.size()==0) break;
+            q.remove();
+            q.add(new TreeNode(-1));
+            
+           
+            
+           p++; 
+            
+        }
+        
+        
+        
+        
+        
+      return root;  
+        
+    }
+}
