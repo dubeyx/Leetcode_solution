@@ -1,0 +1,51 @@
+class Solution {
+    int ans=0;
+    public int beautifulSubsets(int[] nums, int k) {
+        List<Integer> l = new ArrayList<>();
+        helper(nums,k,0,l);
+        
+        return ans;
+    }
+    public void helper(int[] nums, int k, int p,List<Integer> list){
+        
+        if(p>=nums.length) return;
+        
+
+        
+        for(int i=p;i<nums.length;i++){
+           
+            boolean flag=true;
+            
+            for(int j=0;j<list.size();j++){
+                if(Math.abs(list.get(j)-nums[i])==k){
+                    flag=false;
+                    break;
+                }
+            }
+            
+            if(flag==true){
+                List<Integer> li = new ArrayList<>(list);
+                li.add(nums[i]);
+                  ans++;
+                helper(nums,k,i+1,li);
+            }else if(list.size()==0){
+                List<Integer> li= new ArrayList<>();
+                li.add(nums[i]);
+                  ans++;
+                helper(nums,k,i+1,li);
+                
+            }
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+}
