@@ -1,0 +1,23 @@
+class Solution {
+    public int kthFactor(int n, int k) {
+        
+        if(k>n) return -1;
+        if(n==1 && k==1) return 1;
+        if(n==2 && k==2) return 2;
+        if(n==k) return -1;
+        
+        int i=1;
+        int count=0;
+        int j=1;
+        while(j<=n && count<k){
+            
+            if(n%j==0){count++; i=j;}
+            
+            j++;
+        }
+        
+        
+        return count==k?i:-1;
+        
+    }
+}
