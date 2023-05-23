@@ -1,0 +1,24 @@
+class Solution {
+    int ans=0;
+    public int uniquePathsWithObstacles(int[][] og) {
+        
+         int R = og.length;
+        int C = og[0].length;
+             for (int i = 1; i < C; i++) {
+            og[0][i] = (og[0][i] == 0 && og[0][i - 1] == 1) ? 1 : 0;
+        }
+        helper(og,0,0);
+        
+        return ans;
+    }
+    public void helper(int[][] og, int i, int j){
+        
+        if(i>=og.length || j>=og[0].length || og[i][j]==1) return;
+        if(i==og.length-1 && j==og[0].length-1){ans++; return;}
+        
+        
+        helper(og,i+1,j);
+        helper(og,i,j+1);
+        
+    }
+}
