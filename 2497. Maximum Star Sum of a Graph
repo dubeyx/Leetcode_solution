@@ -1,0 +1,64 @@
+class Solution {
+    public int maxStarSum(int[] vals, int[][] edges, int k) {
+        
+        
+       Map<Integer,PriorityQueue<Integer>> mp= new HashMap<>();
+        
+        for(int i=0;i<edges.length;i++){
+            
+            if(mp.isEmpty()){
+                PriorityQueue<Integer> tp = new PriorityQueue<>(Collections.reverseOrder());
+                PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+                
+                tp.add(vals[edges[i][1]]);
+                pq.add(vals[edges[i][0]]);
+                mp.put(edges[i][0],tp);
+                mp.put(edges[i][1],pq);
+            }
+            else {
+                
+ PriorityQueue<Integer> tp = (mp.containsKey(edges[i][0])==true)?mp.get(edges[i][0]): new PriorityQueue<>(Collections.reverseOrder());
+                
+PriorityQueue<Integer> pq = (mp.containsKey(edges[i][1])==true)?mp.get(edges[i][1]): new PriorityQueue<>(Collections.reverseOrder());
+                
+                tp.add(vals[edges[i][1]]);
+                pq.add(vals[edges[i][0]]);
+                mp.put(edges[i][0],tp);
+                mp.put(edges[i][1],pq);
+                
+                
+            }
+              
+        }
+        
+         int ans=Integer.MIN_VALUE;
+        
+        for(int h : vals){
+            ans=Math.max(ans,h);
+        }
+        
+        for(Map.Entry<Integer,PriorityQueue<Integer>> pq : mp.entrySet()){
+            
+            PriorityQueue<Integer> mn =pq.getValue();
+            int t=k;
+            int sum=0;
+           sum= vals[pq.getKey()];
+             
+            while(!mn.isEmpty() && t-->0){
+                sum+=mn.poll();
+                 ans=Math.max(ans,sum);
+                
+            }
+            
+            
+            ans=Math.max(ans,sum);
+            
+            
+        }
+        
+    
+        
+      return ans;  
+        
+    }
+}
