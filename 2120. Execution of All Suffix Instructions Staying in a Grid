@@ -1,0 +1,54 @@
+class Solution {
+    public int[] executeInstructions(int n, int[] startPos, String s) {
+        
+        
+        int[] ans= new int[s.length()];
+        
+        int[][] mat= new int[n][n];
+        
+        for(int i=0;i<s.length();i++){
+            ans[i]=helper(mat,startPos[0],startPos[1],s.substring(i));
+          // System.out.println(s.substring(i));
+        }
+        
+        return ans;
+    }
+    
+    public int helper(int[][] mat, int p, int q, String S){
+        
+        
+        
+        
+        int count=0;
+        
+        for(int i=0;i<S.length();i++){
+            
+            if(S.charAt(i)=='R'){
+                if(q+1<mat.length){q+=1; count++;}
+                else break;
+                
+            }
+           else  if(S.charAt(i)=='L'){
+                 if(q-1>=0) {q-=1; count++;}
+                else break;
+                
+            }
+          else   if(S.charAt(i)=='U'){
+                 if(p-1>=0) {p-=1; count++;}
+                else break;
+                
+            }
+          else   if(S.charAt(i)=='D'){
+                 if(p+1<mat.length) {p+=1; count++;}
+                else break;
+                
+            }
+            
+        }
+        
+        return count;
+        
+    }
+    
+    
+}
