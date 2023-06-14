@@ -16,7 +16,7 @@ class Solution {
         
         
         long z =getMax(l);
-        System.out.println(z + "-" + ans);
+       // System.out.println(z + "-" + ans);
         
         
         return Math.max(ans,ans*z);
