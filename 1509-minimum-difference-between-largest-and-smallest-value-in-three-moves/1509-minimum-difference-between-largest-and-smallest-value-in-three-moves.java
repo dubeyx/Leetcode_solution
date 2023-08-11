@@ -4,13 +4,8 @@ class Solution {
       if(nums.length<=4) return 0;
         
         int min=nums[0];
-        int max=nums[0];
-        for(int i=0;i<nums.length;i++){
-            
-            min=Math.min(min,nums[i]);
-            max=Math.max(max,nums[i]);
-        }
-           
+        int max=nums[nums.length-1];
+       
         
         int ans=max-min;
         
