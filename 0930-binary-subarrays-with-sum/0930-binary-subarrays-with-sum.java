@@ -1,6 +1,6 @@
 class Solution {
     public int numSubarraysWithSum(int[] A, int S) {
-        int N = A.length;
+   int N = A.length;
         int[] P = new int[N + 1];
         for (int i = 0; i < N; ++i)
             P[i+1] = P[i] + A[i];
@@ -13,5 +13,6 @@ class Solution {
         }
 
         return ans;
+        
     }
 }
